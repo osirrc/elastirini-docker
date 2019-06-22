@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Clone and build Anserini
+git clone https://github.com/castorini/anserini.git && cd anserini
+mvn clean package appassembler:assemble -DskipTests
+
+# Start ELK
+service elasticsearch start
+service logstash start
+service kibana start
