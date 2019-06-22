@@ -1,0 +1,54 @@
+#!/bin/bash
+
+JSON=$2
+
+# The number of collections
+NUM_COLLECTIONS=$(echo ${JSON} | jq -r '.collections | length')
+
+# For each collection...
+for i in $(seq 0 $((${NUM_COLLECTIONS} - 1))); do
+
+    COLLECTION_NAME=$(echo ${JSON} | jq -r ".collections[$i].name")
+    COLLECTION_PATH=$(echo ${JSON} | jq -r ".collections[$i].path")
+
+    if [[ ${COLLECTION_NAME} = "core17" ]]; then
+        COLLECTION="NewYorkTimesCollection"
+        GENERATOR="JsoupGenerator"
+    elif [[ ${COLLECTION_NAME} = "core18" ]]; then
+        COLLECTION="WashingtonPostCollection"
+        GENERATOR="WapoGenerator"
+    elif [[ ${COLLECTION_NAME} = "robust04" ]]; then
+        COLLECTION="TrecCollection"
+        GENERATOR="JsoupGenerator"
+    elif [[ ${COLLECTION_NAME} = "gov2" ]]; then
+        COLLECTION="TrecwebCollection"
+        GENERATOR="JsoupGenerator"
+    elif [[ ${COLLECTION_NAME} = "cw09b" ]]; then
+        COLLECTION="ClueWeb09Collection"
+        GENERATOR="JsoupGenerator"
+    elif [[ ${COLLECTION_NAME} = "cw12b" ]]; then
+        COLLECTION="ClueWeb12Collection"
+        GENERATOR="JsoupGenerator"
+    else
+        echo "Unsupported collection"
+        exit -1
+    fi
+
+    # Create index
+    curl -XPUT 'localhost:9200/'${COLLECTION_NAME}
+
+    # Set refresh interval to 60s for the index created
+    curl -XPUT -H 'Content-Type: application/json' 'localhost:9200/'${COLLECTION_NAME}'/_settings' -d '{ "index": { "refresh_interval": "60s"}}'
+
+    # Indexing through Anserini (Elastirini)
+    sh target/appassembler/bin/IndexCollection -collection ${COLLECTION} -generator ${GENERATOR} -es -es.index ${COLLECTION_NAME} -threads 16 -input /absolute/path/to/disk45 -storePositions -storeDocvectors -storeRawDocs
+
+    # Refresh
+    curl -XPOST 'localhost:9200/'${COLLECTION_NAME}'/_refresh'
+
+done
+
+# Stop ELK
+service elasticsearch stop
+service logstash stop
+service kibana stop
