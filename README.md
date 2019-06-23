@@ -1,6 +1,6 @@
 # OSIRRC Docker Image for Elastirini
 
-[**Ze Zhong Wu**](https://github.com/charW/)
+[**Ze Zhong Wu**](https://github.com/charW/), [**Ryan Clancy**](https://github.com/r-clancy/), and [**Jimmy Lin**](https://github.com/lintool/)
 
 This is the docker image for the [Anserini](http://anserini.io/) toolkit (v0.5.1), with Elasticsearch indexing, conforming to the [OSIRRC jig](https://github.com/osirrc/jig/) for the [Open-Source IR Replicability Challenge (OSIRRC) at SIGIR 2019](https://osirrc.github.io/osirrc2019/).
 
@@ -12,11 +12,13 @@ The search results are the same Anserini, thus we use those results.
 ## Quick Start
 The following `jig` command can be used to index TREC disks 4/5 for `robust04`:
 
-`python run.py prepare --repo elastirini --tag latest --collections robust04=/path/to/disk45=trectext`
+`python run.py prepare --repo elastirini --tag <tag> --collections robust04=/path/to/disk45=trectext`
 
 The following `jig` command can be used to perform a retrieval run on the collection with the `robust04` test collection.
 
-`python run.py interact --repo elastirini --tag latest`
+`python run.py interact --repo elastirini --tag <tag>`
+
+Where `<tag>` is valid [tag](https://github.com/osirrc/elastirini-docker/tags).
 
 After entering the above command, use `docker port [container id]` to see the port mappings to know which ports to use to access Elasticsearch and Kibana on the host machine.
 
@@ -96,3 +98,6 @@ The `index` [script](index) indexes the collection with Elasticsearch.
 + ChengXiang Zhai and John Lafferty. (2001) A Study of Smoothing Methods for Language Models Applied to Ad Hoc Information Retrieval. _SIGIR_.
 + Nasreen Abdul-Jaleel, James Allan, W. Bruce Croft, Fernando Diaz, Leah Larkey, Xiaoyan Li, Donald Metzler, Mark D. Smucker, Trevor Strohman, Howard Turtle, and Courtney Wade. (2004) UMass at TREC 2004: Novelty and HARD. _TREC_.
 + Hui Fang and ChengXiang Zhai. (2006) Semantic Term Matching in Axiomatic Approaches to Information Retrieval. _SIGIR_.
+
+## Reviews
+Documentation reviewed at commit [`01223bc`](https://github.com/osirrc/elastirini-docker/commit/5b4b0c2a97def967b34d36b813df5f9ec01223bc) (2019-06-23) by [Ryan Clancy](https://github.com/r-clancy/).
