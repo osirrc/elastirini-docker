@@ -7,13 +7,13 @@ NUM_COLLECTIONS=$(echo ${JSON} | jq -r '.collections | length')
 
 # Wait for ES to be ready
 while true; do
-    echo 'Waiting for ES...'
+    echo 'Waiting for Elasticsearch...'
     STATUS=$(curl -I 'localhost:9200' 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-    echo 'Status is ${STATUS}'
+    echo 'Status is '${STATUS}
     if [[ ${STATUS} == '200' ]]; then
         break
     fi
-    sleep 3
+    sleep 5
 done
 
 # For each collection...
