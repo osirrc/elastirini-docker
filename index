@@ -44,7 +44,7 @@ for i in $(seq 0 $((${NUM_COLLECTIONS} - 1))); do
     sh /work/anserini/target/appassembler/bin/IndexCollection \
         -collection ${COLLECTION} -generator ${GENERATOR} \
         -es -es.index ${COLLECTION_NAME} \
-        -threads 16 -input ${COLLECTION_PATH} \
+        -threads `nproc` -input ${COLLECTION_PATH} \
         -storePositions -storeDocvectors -storeRawDocs
 
     # Refresh
