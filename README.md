@@ -12,11 +12,11 @@ The search results are the same Anserini, thus we use those results.
 ## Quick Start
 The following `jig` command can be used to index TREC disks 4/5 for `robust04`:
 
-`python run.py prepare --repo elastirini --tag <tag> --collections robust04=/path/to/disk45=trectext`
+`python run.py prepare --repo osirrc2019/elastirini --tag <tag> --collections robust04=/path/to/disk45=trectext`
 
 The following `jig` command can be used to perform a retrieval run on the collection with the `robust04` test collection.
 
-`python run.py interact --repo elastirini --tag <tag>`
+`python run.py interact --repo osirrc2019/elastirini --tag <tag>`
 
 Where `<tag>` is valid [tag](https://github.com/osirrc/elastirini-docker/tags).
 
@@ -100,4 +100,4 @@ The `index` [script](index) indexes the collection with Elasticsearch.
 + Hui Fang and ChengXiang Zhai. (2006) Semantic Term Matching in Axiomatic Approaches to Information Retrieval. _SIGIR_.
 
 ## Reviews
-Documentation reviewed at commit [`01223bc`](https://github.com/osirrc/elastirini-docker/commit/5b4b0c2a97def967b34d36b813df5f9ec01223bc) (2019-06-23) by [Ryan Clancy](https://github.com/r-clancy/).
+Documentation reviewed at commit [`b4e32a`](https://github.com/osirrc/elastirini-docker/commit/7775f10e05eae35ac3248faffe18fa52c3b4e32a) (2019-06-23) by [Ryan Clancy](https://github.com/r-clancy/).
