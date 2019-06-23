@@ -4,6 +4,10 @@
 git clone https://github.com/castorini/anserini.git && cd anserini
 mvn clean package appassembler:assemble -DskipTests
 
+# Modify ES and Kibana config
+printf 'transport.host: localhost\ntransport.tcp.port: 9300\nhttp.port: 9200\network.host: 0.0.0.0\n' | cat - /etc/elasticsearch/elasticsearch.yml > config_temp && mv config_temp /etc/elasticsearch/elasticsearch.yml
+printf 'server.host: 0.0.0.0\n' | cat - /etc/kibana/kibana.yml > config_temp && mv config_temp /etc/kibana/kibana.yml
+
 # Start ELK
 service elasticsearch start
 service logstash start
