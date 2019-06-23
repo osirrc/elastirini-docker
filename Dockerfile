@@ -7,6 +7,10 @@ RUN apt update && \
     apt update && \
     apt install -y elasticsearch logstash kibana
 
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+
+RUN export JAVA_HOME
+
 COPY index init interact search /
 
 # Expose Elasticsearch and Kibana ports
