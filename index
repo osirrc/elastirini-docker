@@ -5,6 +5,19 @@ JSON=$2
 # The number of collections
 NUM_COLLECTIONS=$(echo ${JSON} | jq -r '.collections | length')
 
+# Wait for ES to be ready
+while true;
+do
+    echo 'Waiting for ES...'
+    STATUS=$(curl -I 'localhost:9200' 2>/dev/null | head -n 1 | cut -d$' ' -f2)
+    echo 'Status is ${STATUS}'
+    if [[ ${STATUS} == '200' ]] 
+    then
+        break
+    fi
+    sleep 3
+done
+
 # For each collection...
 for i in $(seq 0 $((${NUM_COLLECTIONS} - 1))); do
 
