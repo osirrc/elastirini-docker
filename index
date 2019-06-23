@@ -41,7 +41,11 @@ for i in $(seq 0 $((${NUM_COLLECTIONS} - 1))); do
     curl -XPUT -H 'Content-Type: application/json' 'localhost:9200/'${COLLECTION_NAME}'/_settings' -d '{ "index": { "refresh_interval": "60s"}}'
 
     # Indexing through Anserini (Elastirini)
-    sh target/appassembler/bin/IndexCollection -collection ${COLLECTION} -generator ${GENERATOR} -es -es.index ${COLLECTION_NAME} -threads 16 -input /absolute/path/to/disk45 -storePositions -storeDocvectors -storeRawDocs
+    sh /work/anserini/target/appassembler/bin/IndexCollection \
+        -collection ${COLLECTION} -generator ${GENERATOR} \
+        -es -es.index ${COLLECTION_NAME} \
+        -threads 16 -input /absolute/path/to/disk45 \
+        -storePositions -storeDocvectors -storeRawDocs
 
     # Refresh
     curl -XPOST 'localhost:9200/'${COLLECTION_NAME}'/_refresh'
