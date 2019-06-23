@@ -9,7 +9,6 @@ NUM_COLLECTIONS=$(echo ${JSON} | jq -r '.collections | length')
 while true; do
     echo 'Waiting for Elasticsearch...'
     STATUS=$(curl -I 'localhost:9200' 2>/dev/null | head -n 1 | cut -d$' ' -f2)
-    echo 'Status is '${STATUS}
     if [[ ${STATUS} == '200' ]]; then
         break
     fi
