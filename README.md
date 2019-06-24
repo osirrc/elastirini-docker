@@ -7,7 +7,7 @@ This is the docker image for the [Anserini](http://anserini.io/) toolkit (v0.5.1
 + Supported test collections: `robust04`, `core17`, `core18` (newswire); `gov2`, `cw09b`, `cw12b` (web)
 + Supported hooks: `init`, `index`, `interact`
 
-The search results are the same Anserini, thus we use those results.
+The search results are the same as `anserini-docker`, thus we use those results.
 
 ## Quick Start
 The following `jig` command can be used to index TREC disks 4/5 for `robust04`:
