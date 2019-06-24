@@ -100,4 +100,4 @@ The `index` [script](index) indexes the collection with Elasticsearch.
 + Hui Fang and ChengXiang Zhai. (2006) Semantic Term Matching in Axiomatic Approaches to Information Retrieval. _SIGIR_.
 
 ## Reviews
-Documentation reviewed at commit [`b4e32a`](https://github.com/osirrc/elastirini-docker/commit/7775f10e05eae35ac3248faffe18fa52c3b4e32a) (2019-06-23) by [Ryan Clancy](https://github.com/r-clancy/).
+Documentation reviewed at commit [`b44ccd9`](https://github.com/osirrc/elastirini-docker/commit/702ee38b3af480f462eeead7099e29decb44ccd9) (2019-06-24) by [Ryan Clancy](https://github.com/r-clancy/).
